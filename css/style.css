@@ -1,0 +1,106 @@
+body {
+    font-family: 'Din Condensed', Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    margin: 0px;
+    background-color: #C4CFD1;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    overflow-x: hidden;
+}
+
+
+h1, h2, h3 {
+    font-family: 'Din Alternate';
+}
+
+a {
+    text-decoration: none;
+}
+
+
+nav {
+    background-color: #56747C;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;  
+    /*justify-content: center;*/
+}
+
+nav li {
+    display: inline-block;
+    font-size: 1.7rem;
+    text-transform: uppercase;
+}
+
+nav ul {
+    display: flex;
+    justify-content: left;
+    gap: 15px;  
+}
+
+nav a {
+    text-decoration: none;
+    color: white
+}
+
+
+img {
+    width: 100%;
+}
+
+header {
+    background-color: #C4CFD1;
+    padding:15px 0px 0px 0px;
+}
+
+.current {
+    text-decoration: underline;
+}
+
+.logo-container {
+    text-align: center;
+    padding-top: 0px
+} 
+
+
+.logo {
+    text-decoration: none;
+    color: #0A3641;
+    font-size: 2.7em;
+    text-transform: uppercase;
+    margin-right: 20px;
+}
+
+.add-to-cart {
+    background-color: #0A3641;
+    color: #fff;
+    padding: 10px 100px;
+    border-radius: 5px;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    margin-top: 20px;
+   
+}
+
+.add-to-cart:hover, .cta:hover, .complete-order-cta:hover {
+    background-color: #56747C;
+
+}
+
+main {
+    margin: 15px;
+}
+
+input, textarea {
+    border: 1px solid #C4CFD1;
+    border-radius: 5px;
+    margin: 10px 10px 10px 0px;
+    padding: 10px;
+}
+
+footer {
+    text-align: center;
+    background-color: #56747C;
+    padding: 80px;
+    color: #fff;
+}
