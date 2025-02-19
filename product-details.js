@@ -155,6 +155,7 @@ const urlParams = new URLSearchParams(window.location.search);
 ]
 
 
+
 if (productId) {
     fetchSingleProduct(productId);
   }
@@ -241,4 +242,4 @@ if (productId) {
       updateCartIcon();
     });
   }
-  
+

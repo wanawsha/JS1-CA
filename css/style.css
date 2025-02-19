@@ -157,14 +157,19 @@ footer {
 
   .product-card img {
     width: 100%;
-    max-width: 14em;
-    max-height: 13em;
+    max-width: 11em;
+    height: 13em;
     object-fit: cover;
+    border-radius: 10px;
+    margin-left: 2em;
+    margin-top: 1em;
+
   }
+  
 
   .product-card h2 {
     font-size: 1.5em;
-    margin: 15px;
+    margin: 20px;
   }
 
   .product-card p {
@@ -202,3 +207,5 @@ footer {
     font-size: 16px;
     text-transform: uppercase;
   }
+
+  
