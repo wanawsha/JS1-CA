@@ -14,54 +14,25 @@
         <section class="logo-container">
             <p><a href="index.html" class="logo">Rainy Days</a></p>
         </section>
+        <section class="cart-icon">
+            <a href="checkout.html">
+                <img src="../images/cart.png" alt="Cart">
+                <span id="cart-count">0</span>
+            </a>
+        </section>
     </header>
     <main>
-        <section class="home-womens-products">
-            <h1>Jackets For Women</h1>
-            <div class="women-products">
-                <img src="./images/jacket-white.png" alt="White rain jacket for women">
-                <p><a href="./product-details.html" class="cta">Jacket 1</a></p>
-                <p class="home-page-price">$60</p>
-            </div>
-            <div class="women-products">
-                <img src="./images/jacket-green.jpg" alt="Green jacket for women and men">
-                <p><a href="./product-details.html" class="cta">Jacket 2</a></p>
-                <p class="home-page-price">$70</p>
-            </div>
-            <div class="women-products">
-                <img src="./images/jacket-blue.png" alt="Blue jacket for women and men">
-                <p><a href="./product-details.html" class="cta">Jacket 3</a></p>
-                <p class="home-page-price">$80</p>
-            </div>
-            <div class="women-products">
-                <img src="./images/jacket-red.png" alt="Red jacket for women" >
-                <p><a href="./product-details.html" class="cta">Jacket 4</a></p>
-                <p class="home-page-price">$50</p>
-            </div>
-        </section>
-        <section class="home-mens-products">
-            <h1>Jackets For Men</h1>
-        <div class="men-products">
-            <img src="./images/jacket-yellow-home.png" alt="Yellow and grey rain jacket for men">
-            <p><a href="./product-details.html" class="cta">Jacket 1</a></p>
-            <p class="home-page-price">$60</p>
-        </div>
-        <div class="men-products">
-            <img src="./images/jacket-green.jpg" alt="Green jacket for women and men">
-            <p><a href="./product-details.html" class="cta">Jacket 2</a></p>
-            <p class="home-page-price">$70</p>
-        </div>
-        <div class="men-products">
-            <img src="./images/jacket-blue.png" alt="Blue jacket for women and men">
-            <p><a href="./product-details.html" class="cta">Jacket 3</a></p>
-            <p class="home-page-price">$80</p>
-        </div>
-        <div class="men-products">
-            <img src="./images/jacket-black.jpg" alt="Black rain jacket for men">
-            <p><a href="./product-details.html" class="cta">Jacket 4</a></p>
-            <p class="home-page-price">$50</p>
-        </div>
-        </section>
+        <h1>Products</h1>
+        <div class="filter-container">
+            <label for="gender-filter">Filter by gender:</label>
+            <select id="gender-filter" onchange="handleFilterChange()">
+              <option value="all">All</option>
+              <option value="Female">Women's Jackets</option>
+              <option value="Male">Men's Jackets</option>
+            </select>
+          </div>
+      
+        <section class="products-container"></section>
     </main>
     <footer>
         Copyright &copy; 2024 Rainy Days
