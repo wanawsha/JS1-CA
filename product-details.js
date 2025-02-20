@@ -1,8 +1,4 @@
 
-const urlParams = new URLSearchParams(window.location.search);
-  const productId = urlParams.get('id'); 
-
-
   const products = [
     {
         "id": "1",
@@ -155,91 +151,59 @@ const urlParams = new URLSearchParams(window.location.search);
 ]
 
 
+import { addToCart, updateCartIcon } from './cart.js';
 
-if (productId) {
-    fetchSingleProduct(productId);
+async function fetchSingleProduct(id) {
+  try {
+    const response = await fetch(`https://api.noroff.dev/api/v1/rainy-days/${id}`);
+    const data = await response.json();
+    displayProductDetails(data);
+  } catch (error) {
+    console.error("Error fetching product details:", error);
+    displayLocalProduct(id); // Fallback to local products
   }
-  
-  async function fetchSingleProduct(id) {
-    try {
-      const response = await fetch(`https://api.noroff.dev/api/v1/rainy-days/${id}`);
-      if (response.ok) {
-        const data = await response.json();
-        displayProductDetails(data); 
-      } else {
-        const localProduct = products.find(p => p.id === id);
-        if (localProduct) {
-          displayProductDetails(localProduct); 
-        } else {
-          console.error("Product not found locally or on the API");
-        }
-      }
-    } catch (error) {
-      console.error("Error fetching product details:", error);
-      // Fallback to local products if fetch fails
-      const localProduct = products.find(p => p.id === id);
-      if (localProduct) {
-        displayProductDetails(localProduct);
-      }
-    }
+}
+
+// Display product details using local data as a fallback
+function displayLocalProduct(id) {
+  const localProduct = products.find(p => p.id === id);
+  if (localProduct) {
+    displayProductDetails(localProduct);
+  } else {
+    console.error("Product not found locally or on the API");
   }
-  
-  function displayProductDetails(product) {
-    const productDetailsContainer = document.getElementById('product-details');
-    
-    const price = product.onSale ? product.discountedPrice : product.price;
-  
-    const sizeOptions = product.sizes ? product.sizes.map(size => `<option value="${size}">${size}</option>`).join('') : '<option value="N/A">N/A</option>';
-  
-    productDetailsContainer.innerHTML = `
-      <img src="${product.image.url}" alt="${product.image.alt}">
-      <div class="details-content">
-        <h1>${product.title}</h1>  
-        <p>${product.description}</p>  
-        <p class="price"><strong>Price:</strong> $${price}</p>
-        <p><strong>Available Sizes:</strong> ${product.sizes?.join(", ") || 'N/A'}</p>   
-        <label for="size-select"><strong>Select Size:</strong></label>
-        <select id="size-select">${sizeOptions}</select>
-        <button onclick="addToCart('${product.id}')">Add to Cart</button> 
-      </div>`;
-  }
-  
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  
-  function addToCart(productId) {
-    const selectedSize = document.getElementById('size-select').value;
-  
-    if (selectedSize === 'N/A') {
-      alert('Size is not available for this product.');
-      return;
-    }
-  
-    fetchSingleProduct(productId).then(product => {
-      // Create the cart item object
-      const cartItem = {
-        id: productId,
-        title: product.title,
-        size: selectedSize,
-        quantity: 1,
-        price: product.price
-      };
-  
-      // Check if the item with the selected size already exists in the cart
-      const existingProductIndex = cart.findIndex(item => item.id === productId && item.size === selectedSize);
-  
-      if (existingProductIndex >= 0) {
-        // Increase quantity if product already exists
-        cart[existingProductIndex].quantity += 1;
-      } else {
-        // Add new product to the cart
-        cart.push(cartItem);
-      }
-  
-      // Save the updated cart to localStorage
-      localStorage.setItem("cart", JSON.stringify(cart));
-  
-      // Update the cart icon
-      updateCartIcon();
-    });
-  }
+}
+
+function displayProductDetails(product) {
+  const productDetailsContainer = document.getElementById('product-details');
+  const price = product.onSale ? product.discountedPrice : product.price;
+
+  const sizeOptions = product.sizes
+    ? product.sizes.map(size => `<option value="${size}">${size}</option>`).join('')
+    : '<option value="N/A">N/A</option>';
+
+  productDetailsContainer.innerHTML = `
+    <img src="${product.image.url}" alt="${product.image.alt}">
+    <div class="details-content">
+      <h1>${product.title}</h1>
+      <p>${product.description}</p>
+      <p class="price"><strong>Price:</strong> $${price}</p>
+      <p><strong>Available Sizes:</strong> ${product.sizes?.join(", ") || 'N/A'}</p>
+      <label for="size-select"><strong>Select Size:</strong></label>
+      <select id="size-select">${sizeOptions}</select>
+      <button id="add-to-cart-btn">Add to Cart</button>
+    </div>
+  `;
+
+  document.getElementById('add-to-cart-btn').addEventListener('click', () => {
+    addToCart(product.id);
+  });
+}
+
+const urlParams = new URLSearchParams(window.location.search);
+const productId = urlParams.get('id');
+if (productId) fetchSingleProduct(productId);
+
+// Update cart icon when page loads
+updateCartIcon();
 
